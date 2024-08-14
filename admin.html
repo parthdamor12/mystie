@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HackerIcon - Admin Panel</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Post List in Admin Panel */
+        #post-list {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .post-box {
+            width: 200px;
+            border: 1px solid #ccc;
+            margin: 10px;
+            padding: 10px;
+            background-color: white;
+        }
+
+        .post-box img,
+        .post-box video {
+            width: 100%;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            padding: 5px;
+            background-color: #333;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Check if the user is authenticated
+        if (localStorage.getItem('isAdmin') !== 'true') {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <h1>Admin Panel</h1>
+
+    <form id="post-form">
+        <input type="text" id="title" placeholder="Post Title" required>
+        <input type="text" id="subtitle" placeholder="Post Subtitle" required>
+        <input type="text" id="image" placeholder="Image URL" required>
+        <input type="text" id="video" placeholder="Video URL (optional)">
+        <textarea id="description" placeholder="Post Description" required></textarea>
+
+        <!-- New fields for SEO -->
+        <input type="text" id="tags" placeholder="Tags (comma-separated)" required>
+        <input type="text" id="meta-title" placeholder="Meta Title" required>
+        <textarea id="meta-description" placeholder="Meta Description" required></textarea>
+
+        <button type="submit" onclick="addPost(event)">Add Post</button>
+    </form>
+    <h2 id="success-message" style="display: none; color: green;">Post added successfully!</h2>
+
+    <h2>Your Posts</h2>
+    <div id="post-list"></div>
+
+    <h2>Website Traffic: <span id="traffic-count">0</span></h2>
+
+    <button onclick="logout()">Logout</button>
+
+    <script>
+        function logout() {
+            localStorage.removeItem('isAdmin');
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
